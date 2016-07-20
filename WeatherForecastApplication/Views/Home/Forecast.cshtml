@@ -7,12 +7,12 @@
     <div class="row">
         <div class="col-md-12">
             <h3>Weather Forecast</h3>
-            <h3>@Model.City.Name, @Model.City.Country <button type="button" class="btn btn-default">@Html.ActionLink("Choose other city", "Index")</button> </h3>        
+            <h3>@Model.City.Name, @Model.City.Country @Html.ActionLink("Choose other city", "Index", null, new { @class = "btn btn-default" })</h3>        
 
             <div class="nav nav-pills">
-                <button type="button" class="btn btn-default">@Html.ActionLink("Current", "Forecast", "Home", new { @city = @Model.City.Name, @country = @Model.City.Country, @days = 1 }, null)</button>
-                <button type="button" class="btn btn-default">@Html.ActionLink("For 3 days", "Forecast", "Home", new { @city = @Model.City.Name, @country = @Model.City.Country, @days = 3 }, null)</button>
-                <button type="button" class="btn btn-default">@Html.ActionLink("For 7 days", "Forecast", "Home", new { @city = @Model.City.Name, @country = @Model.City.Country, @days = 7 }, null) </button>
+                @Html.ActionLink("Current", "Forecast", "Home", new { @city = @Model.City.Name, @country = @Model.City.Country, @days = 1 }, new { @class = "btn btn-default" })
+                @Html.ActionLink("For 3 days", "Forecast", "Home", new { @city = @Model.City.Name, @country = @Model.City.Country, @days = 3 }, new { @class = "btn btn-default" })
+                @Html.ActionLink("For 7 days", "Forecast", "Home", new { @city = @Model.City.Name, @country = @Model.City.Country, @days = 7 }, new { @class = "btn btn-default" })
             </div>
 
             <table class="table" style="font-size:16px">

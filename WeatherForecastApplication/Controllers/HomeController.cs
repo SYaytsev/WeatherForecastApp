@@ -29,7 +29,7 @@ namespace WeatherForecastApplication.Controllers
         // GET: /Home/Forecast
         public ActionResult Forecast(string city, string country = "UA", int days = 1)
         {
-            return View(weatherService.getForecast(city, country, days));
+            return View(weatherService.GetForecast(city, country, days));
         }
 
         public ActionResult About()
