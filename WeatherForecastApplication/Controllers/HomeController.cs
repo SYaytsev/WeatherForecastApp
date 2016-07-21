@@ -10,18 +10,18 @@ namespace WeatherForecastApplication.Controllers
 {
     public class HomeController : Controller
     {
-        private WeatherService weatherService;
+        private IWeatherService weatherService;
         List<string> cities;
 
-        public HomeController()
+        public HomeController(IWeatherService weatherService)
         {
-            weatherService = new WeatherService();
+            //weatherService = new WeatherService();
+            this.weatherService = weatherService;
             cities = new List<string> { "Kiev", "Lviv", "Kharkiv", "Dnipropetrovsk", "Odessa" };
         }
         // GET: /Home/Index
         public ActionResult Index()
         {
-            //List<string> cities = new List<string> { "Kiev", "Lviv", "Kharkiv", "Dnipropetrovsk", "Odessa" };
             ViewBag.List = cities;
             return View(cities);
         }

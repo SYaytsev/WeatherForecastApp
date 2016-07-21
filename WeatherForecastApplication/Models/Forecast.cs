@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WeatherForecastApplication.Models
 {
-    public class Forecast
+    public class Forecast : IForecast
     {
         public City City { get; set; }
         public string Cod { get; set; }
