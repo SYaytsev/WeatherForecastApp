@@ -1,15 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 using WeatherForecastApplication.Models;
 
 namespace WeatherForecastApplication.Services
 {
     public class CityService : ICityService
     {
-        public List<City> GetAllPossibleCities()
+        public async Task<List<City>> GetAllPossibleCitiesAsync()
         {
             List<City> allCities = new List<City>();
 
@@ -23,7 +22,7 @@ namespace WeatherForecastApplication.Services
                     allCities.Add(JsonConvert.DeserializeObject<City>(line));
                 }
             }
-            return allCities;
+            return await Task.Factory.StartNew(() => allCities);
         }
         public static bool IsCityExists(List<City> cities, string city, string country)
         {

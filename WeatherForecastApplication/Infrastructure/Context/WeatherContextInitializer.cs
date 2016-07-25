@@ -7,14 +7,14 @@ namespace WeatherForecastApplication.Infrastructure.Context
     //DropCreateDatabaseAlways
     //DropCreateDatabaseIfModelChanges
     {
-        protected override void Seed(WeatherContext context)
+        protected override async void Seed(WeatherContext context)
         {
             context.Cities.Add(new City { Name = "Kiev", Country = "UA" });
             context.Cities.Add(new City { Name = "Lviv", Country = "UA" });
             context.Cities.Add(new City { Name = "Kharkiv", Country = "UA" });
             context.Cities.Add(new City { Name = "Dnipropetrovsk", Country = "UA" });
             context.Cities.Add(new City { Name = "Odessa", Country = "UA" });
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }

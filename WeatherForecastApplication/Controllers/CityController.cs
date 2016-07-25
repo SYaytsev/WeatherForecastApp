@@ -1,13 +1,10 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using WeatherForecastApplication.Infrastructure.Context;
-using Newtonsoft.Json;
 using WeatherForecastApplication.Models;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 using WeatherForecastApplication.Services;
+using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace WeatherForecastApplication.Controllers
 {
@@ -22,9 +19,9 @@ namespace WeatherForecastApplication.Controllers
         }
 
         // GET: City/Index
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(weatherContext.Cities.ToList());
+            return View(await weatherContext.Cities.ToListAsync());
         }
 
         // GET: City/Default
@@ -34,28 +31,27 @@ namespace WeatherForecastApplication.Controllers
             return RedirectToAction("Index");
         }
         // GET: City/Add
-        public ActionResult Add(string city, string country = "UA")
+        public async Task<ActionResult> Add(string city, string country = "UA")
         {
-            List<City> allCities = cityService.GetAllPossibleCities();
+            List<City> allCities = await cityService.GetAllPossibleCitiesAsync();
             if (CityService.IsCityExists(allCities, city, country))
             {
-                List<City> cities = weatherContext.Cities.ToList();
+                List<City> cities = await weatherContext.Cities.ToListAsync();
                 if (!CityService.IsCityExists(cities, city, country))
                 {
                     weatherContext.Cities.Add(new City { Name = city, Country = country });
-                    weatherContext.SaveChanges();
+                    await weatherContext.SaveChangesAsync();
                 }
             }
             return RedirectToAction("Index");
         }
         // GET: City/Delete
-        public ActionResult Delete(string city, string country = "UA")
+        public async Task<ActionResult> Delete(string city, string country = "UA")
         {
-            weatherContext.Cities.Remove(weatherContext.Cities.SingleOrDefault(item => item.Name == city && item.Country == country));
-            weatherContext.SaveChanges();
+            weatherContext.Cities.Remove(await weatherContext.Cities.SingleOrDefaultAsync
+                (item => item.Name == city && item.Country == country));
+            await weatherContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-
-
     }
 }

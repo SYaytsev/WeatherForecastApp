@@ -1,9 +1,10 @@
-﻿using WeatherForecastApplication.Models;
+﻿using System.Threading.Tasks;
+using WeatherForecastApplication.Models;
 
 namespace WeatherForecastApplication.Services
 {
     public interface IWeatherService
     {
-        IForecast GetForecast(string city, string country, int days);
+        Task<IForecast> GetForecastAsync(string city, string country, int days);
     }
 }

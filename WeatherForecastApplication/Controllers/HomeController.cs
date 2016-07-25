@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using WeatherForecastApplication.Infrastructure.Context;
 using WeatherForecastApplication.Services;
@@ -9,29 +10,22 @@ namespace WeatherForecastApplication.Controllers
     {
         private IWeatherService weatherService;
         private WeatherContext weatherContext;
-        //List<string> cities;
 
         public HomeController(IWeatherService weatherService)
         {
-            //weatherService = new WeatherService();
             this.weatherService = weatherService;
-            this.weatherContext = new WeatherContext();
-            //cities = new List<string> { "Kiev", "Lviv", "Kharkiv", "Dnipropetrovsk", "Odessa" };
+            weatherContext = new WeatherContext();
         }
         // GET: /Home/Index
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            /*
-            ViewBag.List = cities;
-            return View(cities);
-            */
-            return View(weatherContext.Cities.ToList());
+            return View(await weatherContext.Cities.ToListAsync());
         }
 
         // GET: /Home/Forecast
-        public ActionResult Forecast(string city, string country = "UA", int days = 1)
+        public async Task<ActionResult> Forecast(string city, string country = "UA", int days = 1)
         {
-            return View(weatherService.GetForecast(city, country, days));
+            return View(await weatherService.GetForecastAsync(city, country, days));
         }
 
         public ActionResult History()
@@ -41,7 +35,7 @@ namespace WeatherForecastApplication.Controllers
 
         public ActionResult About()
         {
-            return View(weatherContext.Cities.ToList());
+            return View();
         }
 
         public ActionResult Contact()

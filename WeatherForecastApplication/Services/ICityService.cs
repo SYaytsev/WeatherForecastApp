@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using WeatherForecastApplication.Models;
 
 namespace WeatherForecastApplication.Services
 {
     public interface ICityService
     {
-        List<City> GetAllPossibleCities();
+        Task<List<City>> GetAllPossibleCitiesAsync();
     }
 }
