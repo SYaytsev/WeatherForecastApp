@@ -31,6 +31,7 @@ namespace WeatherForecastApplication.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IWeatherService>().To<WeatherService>();
+            kernel.Bind<ICityService>().To<CityService>();
         }
     }
 }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using WeatherForecastApplication.Models.Enums;
+using WeatherForecastApplication.Infrastructure.Context;
 using WeatherForecastApplication.Services;
 
 namespace WeatherForecastApplication.Controllers
@@ -11,19 +8,24 @@ namespace WeatherForecastApplication.Controllers
     public class HomeController : Controller
     {
         private IWeatherService weatherService;
-        List<string> cities;
+        private WeatherContext weatherContext;
+        //List<string> cities;
 
         public HomeController(IWeatherService weatherService)
         {
             //weatherService = new WeatherService();
             this.weatherService = weatherService;
-            cities = new List<string> { "Kiev", "Lviv", "Kharkiv", "Dnipropetrovsk", "Odessa" };
+            this.weatherContext = new WeatherContext();
+            //cities = new List<string> { "Kiev", "Lviv", "Kharkiv", "Dnipropetrovsk", "Odessa" };
         }
         // GET: /Home/Index
         public ActionResult Index()
         {
+            /*
             ViewBag.List = cities;
             return View(cities);
+            */
+            return View(weatherContext.Cities.ToList());
         }
 
         // GET: /Home/Forecast
@@ -32,9 +34,14 @@ namespace WeatherForecastApplication.Controllers
             return View(weatherService.GetForecast(city, country, days));
         }
 
-        public ActionResult About()
+        public ActionResult History()
         {
             return View();
+        }
+
+        public ActionResult About()
+        {
+            return View(weatherContext.Cities.ToList());
         }
 
         public ActionResult Contact()

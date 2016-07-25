@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -47,12 +49,17 @@ namespace WeatherForecastApplication.Models
 
     public class City
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
+        [NotMapped]
         public Coord Coord { get; set; }
         public string Country { get; set; }
+        [NotMapped]
         public int Population { get; set; }
     }
+
     public class Coord
     {
         public double Lon { get; set; }

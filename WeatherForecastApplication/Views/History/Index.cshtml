@@ -1,0 +1,10 @@
+﻿@model IEnumerable<WeatherForecastApplication.Models.Forecast>
+@{
+    ViewBag.Title = "History";
+}
+@{ 
+    Model.GroupBy(forecast => forecast.City.Name).ToDictionary(forecast => forecast.Key, forecast => forecast.ToList());
+
+}
+
+

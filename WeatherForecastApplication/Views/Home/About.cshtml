@@ -1,7 +1,25 @@
-﻿@{
+﻿@model IEnumerable<WeatherForecastApplication.Models.City>
+@{
     ViewBag.Title = "About";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
+
+<table>
+    <tr> Город </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td align="center">  @item.Name @item.Country  </td>
+
+        </tr>
+    }
+</table>
+
+    @Html.DropDownList("city",
+                       new SelectList(Model.Select(i => i.Name).Distinct().ToList()),
+                       new { @class = "input-large form-control" })
+
+
 
 <p>Use this area to provide additional information.</p>
