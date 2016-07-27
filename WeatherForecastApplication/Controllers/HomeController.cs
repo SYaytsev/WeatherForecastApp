@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using WeatherForecastApplication.Infrastructure.Context;
@@ -19,13 +20,29 @@ namespace WeatherForecastApplication.Controllers
         // GET: /Home/Index
         public async Task<ActionResult> Index()
         {
-            return View(await weatherContext.Cities.ToListAsync());
+            try
+            {
+                return View(await weatherContext.Cities.ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                ViewData["Message"] = ex.Message;
+                return View("Error");
+            }
         }
 
         // GET: /Home/Forecast
         public async Task<ActionResult> Forecast(string city, string country = "UA", int days = 1)
         {
-            return View(await weatherService.GetForecastAsync(city, country, days));
+            try
+            {
+                return View(await weatherService.GetForecastAsync(city, country, days));
+            }
+            catch (Exception ex)
+            {
+                ViewData["Message"] = ex.Message;
+                return View("Error");
+            }
         }
 
         public ActionResult History()

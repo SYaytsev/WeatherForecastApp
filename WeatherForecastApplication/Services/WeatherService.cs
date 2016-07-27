@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using WeatherForecastApplication.Models;
 using System.Threading.Tasks;
+using System;
 
 namespace WeatherForecastApplication.Services
 {
@@ -13,11 +14,15 @@ namespace WeatherForecastApplication.Services
         {
             string url = string.Format("http://api.openweathermap.org/data/2.5/forecast/daily?q={0},{1}&cnt={2}&units=metric&APPID={3}",
     city, country, days, apiKey);
-            using (var client = new HttpClient())
+            try
             {
-                var response = await client.GetStringAsync(url);
-                return await Task.Factory.StartNew(() => (IForecast)JsonConvert.DeserializeObject<Forecast>(response));
+                using (var client = new HttpClient())
+                {
+                    var response = await client.GetStringAsync(url);
+                    return await Task.Factory.StartNew(() => (IForecast)JsonConvert.DeserializeObject<Forecast>(response));
+                }
             }
+            catch (Exception ex) { throw; }
         }
     }
 }
