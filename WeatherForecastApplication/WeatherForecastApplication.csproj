@@ -201,6 +201,7 @@
     <Content Include="Views\Home\Forecast.cshtml" />
     <Content Include="Views\City\Index.cshtml" />
     <Content Include="Views\History\Index.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
