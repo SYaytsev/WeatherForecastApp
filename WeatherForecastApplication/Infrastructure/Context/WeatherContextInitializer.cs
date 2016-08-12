@@ -6,6 +6,7 @@ namespace WeatherForecastApplication.Infrastructure.Context
     public class WeatherContextInitializer : DropCreateDatabaseIfModelChanges<WeatherContext>
     //DropCreateDatabaseAlways
     //DropCreateDatabaseIfModelChanges
+    //
     {
         protected override void Seed(WeatherContext context)
         {
