@@ -3,7 +3,7 @@ using WeatherForecastApplication.Models;
 
 namespace WeatherForecastApplication.Infrastructure.Context
 {
-    public class WeatherContextInitializer : DropCreateDatabaseAlways<WeatherContext>
+    public class WeatherContextInitializer : DropCreateDatabaseIfModelChanges<WeatherContext>
     //DropCreateDatabaseAlways
     //DropCreateDatabaseIfModelChanges
     {
