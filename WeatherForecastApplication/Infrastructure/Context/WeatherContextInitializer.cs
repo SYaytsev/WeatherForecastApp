@@ -15,6 +15,7 @@ namespace WeatherForecastApplication.Infrastructure.Context
             context.Cities.Add(new City { Name = "Dnipropetrovsk", Country = "UA" });
             context.Cities.Add(new City { Name = "Odessa", Country = "UA" });
             context.SaveChanges();
+
         }
     }
 }
