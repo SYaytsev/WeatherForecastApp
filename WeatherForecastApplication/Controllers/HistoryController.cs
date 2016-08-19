@@ -4,10 +4,6 @@ namespace WeatherForecastApplication.Controllers
 {
     public class HistoryController : Controller
     {
-
-        /// <summary>
-        /// some comment
-        /// </summary>
         public HistoryController()
         {
                 
